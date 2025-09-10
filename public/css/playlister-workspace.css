@@ -207,3 +207,8 @@ body {
   box-shadow: 2px 4px #888888;
   border-radius: 5px;
 }
+
+.toolbar-button.disabled {
+    opacity: 0.5;
+    pointer-events: none;
+}
