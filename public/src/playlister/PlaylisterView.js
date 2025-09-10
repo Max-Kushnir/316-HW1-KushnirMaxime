@@ -171,12 +171,24 @@ export default class PlaylisterView {
             itemDiv.classList.add("unselected-song-card");
             itemDiv.id = "song-card-" + (i + 1);
 
+            console.log("Song " + i + ":", song);
+            console.log("Song properties:", Object.keys(song));
+            console.log("Song values:", Object.values(song));
+            console.log("Title:", song.title);
+            console.log("Artist:", song.artist);
+            console.log("Year:", song.year);
+            console.log("YouTube ID:", song.youTubeId);
+
             // HAVE THE TEXT LINK TO THE YOUTUBE VIDEO
             let youTubeLink = document.createElement("a");
             youTubeLink.classList.add("song-card-title");
             youTubeLink.href = "https://www.youtube.com/watch?v=" + song.youTubeId;
             youTubeLink.target = 1;
             youTubeLink.innerHTML = song.title;
+
+            let yearSpan = document.createElement("span");
+            yearSpan.class = "song-card-year";
+            yearSpan.innerHTML = " (" + song.year + ") ";
 
             let bySpan = document.createElement("span");
             bySpan.class = "song-card-by";
@@ -190,6 +202,7 @@ export default class PlaylisterView {
             let songNumber = document.createTextNode("" + (i + 1) + ". ");
             itemDiv.appendChild(songNumber);
             itemDiv.appendChild(youTubeLink);
+            itemDiv.appendChild(yearSpan)
             itemDiv.appendChild(bySpan);
             itemDiv.appendChild(artistSpan);
 
