@@ -27,6 +27,14 @@ export default class PlaylisterController {
 
         // SETUP THE MODAL HANDLERS
         this.registerModalHandlers();
+
+        // HANDLES CREATING A NEW EMPTY PLAYLIST
+        const addListButton = document.getElementById("add-playlist-button");
+        if (addListButton) {
+            addListButton.onmousedown = (event) => {
+                this.model.addNewList("Untitled", []);
+            }
+        }
     }
 
     /**
