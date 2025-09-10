@@ -162,6 +162,13 @@ export default class PlaylisterController {
             deleteListModal.classList.add("is-visible");
             this.model.toggleConfirmDialogOpen();
         }
+
+        // HANDLES DUPLICATING A PLAYLIST
+        document.getElementById("duplicate-list-button-" + id).onmousedown = (event) => {
+            this.ignoreParentClick(event);
+            this.model.duplicatePlaylist(id);
+        }
+
         // FOR RENAMING THE LIST NAME
         document.getElementById("playlist-card-" + id).ondblclick = (event) => {
             let text = document.getElementById("playlist-card-text-" + id)

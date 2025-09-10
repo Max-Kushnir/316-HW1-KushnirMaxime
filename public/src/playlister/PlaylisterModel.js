@@ -512,4 +512,30 @@ export default class PlaylisterModel {
                             this.confirmDialogOpen, this.tps.hasTransactionToDo(), this.tps.hasTransactionToUndo());
         }
     }
+
+    /**
+     * Duplicates a playlist and all songs within it as a new seperate playlist.
+     * 
+     * @param {number} originalId the ID of the playlist to be duplicated.
+     * @return {Playlist} the newly created duplicate playlist.
+     */
+
+    duplicatePlaylist(originalId) {
+        const original = this.getPlaylist(originalId);
+        if (!original) return null;
+
+        const clonedSongs  = original.songs.map(song => song.clone());
+
+        const newName = `${original.getName()} (Copy)`;
+
+        let playlistBuilder = PlaylistBuilder.getSingleton();
+        let newList = playlistBuilder.buildPlaylist(newName, clonedSongs);
+        
+        this.addList(newList);
+        
+        this.saveLists();
+
+        return newList;
+    }
 }
+

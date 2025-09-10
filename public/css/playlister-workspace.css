@@ -157,6 +157,8 @@ body {
 .song-card-button {
   float:right;
   font-size:24pt;
+  width: 48px;    
+  height: 48px; 
 }
 
 .playlist-card,
