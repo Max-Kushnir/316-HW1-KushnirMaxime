@@ -25,6 +25,17 @@ export default class PlaylisterController {
         }
     }
 
+    updateAddSongButtonState() {
+        const addListButton = document.getElementById("add-song-button");
+        if (!this.model.hasCurrentList()) {
+            addListButton.disabled = true;
+            addListButton.classList.add("disabled");
+        } else {
+            addListButton.disabled = false;
+            addListButton.classList.remove("disabled");
+        }
+    }
+
     /**
      * This function defines the event handlers that will respond to interactions
      * with all the static user interface controls, meaning the controls that
@@ -71,6 +82,7 @@ export default class PlaylisterController {
            // this.model.unselectAll();
             this.model.unselectCurrentList();
             this.updateAddPlaylistButtonState();
+            this.updateAddSongButtonState()
         }
     }
 
@@ -138,6 +150,7 @@ export default class PlaylisterController {
                 this.model.loadList(id);
 
                 this.updateAddPlaylistButtonState();
+                this.updateAddSongButtonState()
             }
         }
         // HANDLES DELETING A PLAYLIST
