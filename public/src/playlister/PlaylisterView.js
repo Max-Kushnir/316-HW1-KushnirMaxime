@@ -164,58 +164,28 @@ export default class PlaylisterView {
 
         // FOR EACH SONG
         for (let i = 0; i < playlist.songs.length; i++) {
-            // MAKE AN ITEM (i.e. CARD)
-            let song = playlist.getSongAt(i);
-            let itemDiv = document.createElement("div");
-            itemDiv.classList.add("song-card");
-            itemDiv.classList.add("unselected-song-card");
-            itemDiv.id = "song-card-" + (i + 1);
+            const song = playlist.getSongAt(i);
 
-            console.log("Song " + i + ":", song);
-            console.log("Song properties:", Object.keys(song));
-            console.log("Song values:", Object.values(song));
-            console.log("Title:", song.title);
-            console.log("Artist:", song.artist);
-            console.log("Year:", song.year);
-            console.log("YouTube ID:", song.youTubeId);
+            let songCard = document.getElementById("song-card-prototype").cloneNode(true);
+            songCard.hidden = false;
+            songCard.id = "song-card-" + (i + 1);
+            songCard.classList.add("song-card", "unselected-song-card");
 
-            // HAVE THE TEXT LINK TO THE YOUTUBE VIDEO
-            let youTubeLink = document.createElement("a");
-            youTubeLink.classList.add("song-card-title");
+            songCard.querySelector(".song-card-artist").textContent = song.artist;
+            songCard.querySelector(".song-card-year").textContent = " (" + song.year + ") ";
+                  
+            let youTubeLink = songCard.querySelector(".song-card-title");
             youTubeLink.href = "https://www.youtube.com/watch?v=" + song.youTubeId;
-            youTubeLink.target = 1;
-            youTubeLink.innerHTML = song.title;
+            youTubeLink.textContent = song.title;
+            
+            const deleteButton = songCard.querySelector(".song-card-button");
+            deleteButton.id = "remove-song-" + i;   
 
-            let yearSpan = document.createElement("span");
-            yearSpan.className = "song-card-year";
-            yearSpan.innerHTML = " (" + song.year + ") ";
+            const numElement = document.createElement("span");
+            numElement.textContent = (i + 1) + ". ";
+            songCard.insertBefore(numElement, songCard.firstChild);
 
-            let bySpan = document.createElement("span");
-            bySpan.className = "song-card-by";
-            bySpan.innerHTML = " by ";
-
-            let artistSpan = document.createElement("span");
-            artistSpan.className = "song-card-artist";
-            artistSpan.innerHTML = song.artist;
-
-            // PUT THE CONTENT INTO THE CARD
-            let songNumber = document.createTextNode("" + (i + 1) + ". ");
-            itemDiv.appendChild(songNumber);
-            itemDiv.appendChild(youTubeLink);
-            itemDiv.appendChild(yearSpan)
-            itemDiv.appendChild(bySpan);
-            itemDiv.appendChild(artistSpan);
-
-            // MAKE THE DELETE LIST BUTTON
-            let deleteButton = document.createElement("input");
-            deleteButton.setAttribute("type", "button");
-            deleteButton.setAttribute("id", "remove-song-" + i);
-            deleteButton.setAttribute("class", "song-card-button");
-            deleteButton.setAttribute("value", "\u2715");
-            itemDiv.appendChild(deleteButton);
-
-            // AND PUT THE CARD INTO THE UI
-            itemsDiv.appendChild(itemDiv);
+            itemsDiv.appendChild(songCard);
         }
         // NOW THAT THE CONTROLS EXIST WE CAN REGISTER EVENT
         // HANDLERS FOR THEM
