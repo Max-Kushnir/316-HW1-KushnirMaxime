@@ -74,6 +74,11 @@ export default class PlaylisterView {
         editSongModal.classList.remove("is-visible");
     }
 
+    closeRemoveSongModal() {
+        let removeSongModal = document.getElementById("remove-song-modal");
+        removeSongModal.classList.remove("is-visible");
+    }
+
     /**
      * This function disables the button that has the id parameter
      * as it's id property. This should be done as part of a foolproof

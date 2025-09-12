@@ -187,6 +187,14 @@ export default class PlaylisterModel {
         return this.deleteListId;
     }
 
+    getRemoveSongIndex() {
+        return this.removeSongIndex;
+    }
+
+    setRemoveSongIndex(initIndex) {
+        this.removeSongIndex = initIndex
+    }
+
     /**
      * Accessor method for getting the index of the list with id
      * 
