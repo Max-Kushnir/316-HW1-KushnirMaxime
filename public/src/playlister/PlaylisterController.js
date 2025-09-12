@@ -115,6 +115,22 @@ export default class PlaylisterController {
             editSongModal.classList.remove("is-visible");
         }
 
+        document.getElementById("edit-song-confirm-button").onclick = (event) => {
+            let newTitle = document.getElementById("edit-song-modal-title-textfield").value;
+            let newArtist = document.getElementById("edit-song-modal-artist-textfield").value;
+            let newYear = document.getElementById("edit-song-modal-year-textfield").value;
+            let newYouTubeId = document.getElementById("edit-song-modal-youTubeId-textfield").value;
+            
+            let songIndex = this.model.getEditSongIndex();
+
+            this.model.addTransactionToEditSong(songIndex, newTitle, newArtist, newYear, newYouTubeId);
+
+            this.model.toggleConfirmDialogOpen();
+
+            let editSongModal = document.getElementById("edit-song-modal");
+            editSongModal.classList.remove("is-visible");
+        }
+
         // RESPOND TO THE USER CONFIRMING TO DELETE A PLAYLIST
         document.getElementById("delete-list-confirm-button").onclick = (event) => {
             // NOTE THAT WE SET THE ID OF THE LIST TO REMOVE

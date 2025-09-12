@@ -5,6 +5,7 @@ import CreateSong_Transaction from "./transactions/CreateSong_Transaction.js";
 import MoveSong_Transaction from "./transactions/MoveSong_Transaction.js";
 import RemoveSong_Transaction from "./transactions/RemoveSong_Transaction.js";
 import PlaylistBuilder from './PlaylistBuilder.js';
+import EditSong_Transaction from './transactions/EditSong_Transaction.js';
 
 /**
  * PlaylisterModel.js
@@ -84,6 +85,15 @@ export default class PlaylisterModel {
                             this.confirmDialogOpen, this.tps.hasTransactionToDo(), this.tps.hasTransactionToUndo());
     }
 
+    addTransactionToEditSong(index, newTitle, newArtist, newYear, newYouTubeId) {
+        let oldSong = this.getSong(index);
+        let newSong = new PlaylistSongPrototype(newTitle, newArtist, newYear, newYouTubeId);
+        let transaction = new EditSong_Transaction(this, index, oldSong, newSong);
+        this.tps.processTransaction(transaction);
+        this.view.updateToolbarButtons(this.hasCurrentList(), 
+                            this.confirmDialogOpen, this.tps.hasTransactionToDo(), this.tps.hasTransactionToUndo());
+    }
+
     /**
      * Adds an undoable transaction for moving a song to the transaction stack.
      *
@@ -150,6 +160,12 @@ export default class PlaylisterModel {
      */
     getEditSongIndex() {
         return this.editSongIndex;
+    }
+
+    editSong(index, newSong) {
+        this.currentList.songs[index] = newSong;
+        this.view.refreshSongCards(this.currentList);
+        this.saveLists();
     }
 
     /**
