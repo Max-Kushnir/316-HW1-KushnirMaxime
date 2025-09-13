@@ -11,14 +11,14 @@ export class jsTPS_Transaction {
     /**
      * This method is called by jsTPS when a transaction is executed.
      */
-    executeDo() {
+    doTransaction() {
         console.log("doTransaction - MISSING IMPLEMENTATION");
     }
 
     /**
      * This method is called by jsTPS when a transaction is undone.
      */
-    executeUndo() {
+    undoTransaction() {
         console.log("undoTransaction - MISSING IMPLEMENTATION");
     }
 }

@@ -259,5 +259,11 @@ export default class PlaylisterView {
         else {
             this.enableButton("undo-button");
         }
+        if(hasTransactionToDo) {
+           this.enableButton("redo-button"); 
+        }
+        else {
+            this.disableButton("redo-button")
+        }
     }
 }

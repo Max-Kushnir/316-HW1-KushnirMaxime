@@ -1,5 +1,9 @@
-export default class EditSong_Transaction {
+import { jsTPS_Transaction } from '../../jstps/index.js'
+
+
+export default class EditSong_Transaction extends jsTPS_Transaction {
     constructor(initModel, initIndex, initOldSong, initNewSong) {
+        super();
         this.model = initModel;
         this.index = initIndex;
         this.oldSong = initOldSong;

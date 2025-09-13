@@ -115,7 +115,7 @@ export default class PlaylisterController {
             editSongModal.classList.remove("is-visible");
         }
 
-        document.getElementById("edit-song-confirm-button").onclick = (event) => {
+        const handleEditSongConfirm = (event) => {
             let newTitle = document.getElementById("edit-song-modal-title-textfield").value;
             let newArtist = document.getElementById("edit-song-modal-artist-textfield").value;
             let newYear = document.getElementById("edit-song-modal-year-textfield").value;
@@ -129,7 +129,30 @@ export default class PlaylisterController {
 
             let editSongModal = document.getElementById("edit-song-modal");
             editSongModal.classList.remove("is-visible");
-        }
+        };
+
+        const button = document.getElementById("edit-song-confirm-button");
+        button.addEventListener('click', handleEditSongConfirm);
+
+        // for some reason when I pressed enter, it always pressed it in a different text field than confirm, so it didn't work. fixed by allowing it to work in all textfields
+
+        const textFields = [
+            "edit-song-modal-title-textfield",
+            "edit-song-modal-artist-textfield", 
+            "edit-song-modal-year-textfield",
+            "edit-song-modal-youTubeId-textfield"
+        ];
+
+        textFields.forEach(fieldId => {
+            const field = document.getElementById(fieldId);
+            if (field) {
+                field.addEventListener('keydown', event => {
+                    if (event.key === 'Enter') {
+                        handleEditSongConfirm(event);
+                    }
+                });
+            }
+        });
 
 
 
