@@ -154,8 +154,6 @@ export default class PlaylisterController {
             }
         });
 
-
-
         // RESPOND TO THE USER CONFIRMING TO DELETE A PLAYLIST
         document.getElementById("delete-list-confirm-button").onclick = (event) => {
             // NOTE THAT WE SET THE ID OF THE LIST TO REMOVE
